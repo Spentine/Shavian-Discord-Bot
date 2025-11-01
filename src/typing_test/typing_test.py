@@ -1,5 +1,6 @@
 from typing_test.text_gen import generate_word_list
 from typing_test.copyproof import copyproof, has_copyproof
+from typing_test.results import get_results
 import discord
 import time
 
@@ -57,3 +58,52 @@ def typing_test_main(bot):
       return
     
     test_data = typing_test_users[author.id]
+    
+    # check channel
+    if message.channel.id != test_data["channel_id"]:
+      return
+    
+    # check time
+    current_time = time.time()
+    
+    # expire after 1 hour
+    if current_time - test_data["timestamp"] > (3600):
+      del typing_test_users[author.id]
+      return
+    
+    # check copyproof
+    if has_copyproof(message.content):
+      await message.channel.send(
+        f"{author.mention} u cheated! :<"
+      )
+      del typing_test_users[author.id]
+      return
+    
+    # compare results
+    results = get_results(
+      message.content,
+      test_data["word_list"],
+      current_time - test_data["timestamp"]
+    )
+    
+    # delete user from active tests
+    del typing_test_users[author.id]
+    
+    # send results
+    await message.channel.send(
+      f"*{author.mention}'s Results*:\n" +
+      f"- **{results["wpm"]:.2f}** WPM\n" +
+      f"- Accuracy: **{results["accuracy"]:.2f}%**\n"
+    )
+  
+  @typing_test_group.command(description="Cancel your active Typing Test")
+  async def cancel_typing_test(ctx):
+    """
+    cancels the user's active typing test
+    """
+    
+    if ctx.author.id in typing_test_users:
+      del typing_test_users[ctx.author.id]
+      await ctx.respond("Your active Typing Test has been cancelled.")
+    else:
+      await ctx.respond("You do not have an active Typing Test.")
