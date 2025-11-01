@@ -1,13 +1,15 @@
-invisible_char = "\u200b" # zero width space
+invisible_char = "\u200d" # zero width joiner
 
 def copyproof(text):
   """
-  copyproofs a text by inserting invisible characters between each character
+  copyproofs a text by inserting invisible characters between each word
   
   makes it possible to detect copied text
   """
-  
-  return invisible_char.join(text)
+
+  return (
+    invisible_char
+  ).join(text)
 
 def has_copyproof(text):
   """
