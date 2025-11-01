@@ -48,3 +48,7 @@ def primary_interactions(bot):
   @bot.command(description="Retrieve latency of bot")
   async def ping(ctx):
     await ctx.respond(f"Latency: {round(bot.latency * 1000)}ms")
+  
+  @bot.command(description="Help command")
+  async def help(ctx):
+    await ctx.respond("idk man just use the slash commands lol")
