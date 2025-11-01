@@ -14,6 +14,4 @@ Once you execute the Python file, you will be greeted with a request to enter yo
 
 ## Personal Narrative
 
-I have wanted to create this bot for months, but I haven't figured out the most socially acceptable way to introduce the idea. One day, a friend from the server expressed their desire for a Shavian equaivalent of a fun typing test in a Discord bot. I shared my interest in it too, and realized -- this is probably the time I finally make a bot, not just with the typing test, but with other features that the server may find useful.
-
-Hopefully it turns out well.
+I have wanted to create this bot for months, but I decided not to so that I wasn't forcing my ideas on others. One day, a friend from the server expressed their desire for a Shavian equaivalent of a fun typing test in a Discord bot. I shared my interest in it too, and realized -- this is probably the time I should finally make a bot, not just with the typing test, but with other features the server may find useful.
