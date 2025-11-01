@@ -1,0 +1,32 @@
+{
+  "ping_command_name": "ping",
+  "ping_command_description": "Retrieve latency of bot",
+  "ping_response": "Latency: {latency}ms",
+  
+  "help_command_name": "help",
+  "help_command_description": "Help command",
+  "help_response": "idk man just use the slash commands lol",
+  
+  "typing_test": {
+    "group_command_name": "typing",
+    "group_command_description": "Typing Test-related commands",
+    
+    "start_command_name": "start",
+    "start_command_description": "Create a new Typing Test",
+    "start_responses": {
+      "invalid_script": "Invalid script choice."
+    },
+    
+    "on_message_responses": {
+      "cheated": "{mention} u cheated! :<",
+      "results": "*{mention}'s Results*:\n- **{wpm:.2f} WPM\n-Accuracy: **{accuracy:.2f}%**"
+    },
+    
+    "cancel_command_name": "cancel",
+    "cancel_command_description": "Cancel your active Typing Test",
+    "cancel_responses": {
+      "not_active": "You do not have an active Typing Test.",
+      "cancelled": "Your active Typing Test has been cancelled."
+    }
+  }
+}

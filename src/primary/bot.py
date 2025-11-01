@@ -1,6 +1,9 @@
+from locales.locales import locales, pass_locales
 from primary.util import retrieve_init_data
 from readlex.readlex import readlex_main
 from typing_test.typing_test import typing_test_main
+
+from functools import partial
 import discord
 
 class ShavBot(discord.Bot):
@@ -45,10 +48,26 @@ def primary_interactions(bot):
   provides primary bot interactions mainly for testing purposes
   """
   
-  @bot.command(description="Retrieve latency of bot")
-  async def ping(ctx):
-    await ctx.respond(f"Latency: {round(bot.latency * 1000)}ms")
+  async def ping(ctx, code):
+    await ctx.respond(
+      locales[code]["ping_response"]
+        .format(latency=bot.latency*1000)
+    )
   
-  @bot.command(description="Help command")
-  async def help(ctx):
-    await ctx.respond("idk man just use the slash commands lol")
+  async def help(ctx, code):
+    await ctx.respond(
+      locales[code]["help_response"]
+    )
+  
+  # register commands
+  for code in locales:
+    locale = locales[code]
+    
+    bot.command(
+      name=locale["ping_command_name"],
+      description=locale["ping_command_description"]
+    )(pass_locales(ping, code))
+    bot.command(
+      name=locale["help_command_name"],
+      description=locale["help_command_description"]
+    )(pass_locales(help, code))

@@ -1,6 +1,9 @@
+from locales.locales import locales, pass_locales
 from typing_test.text_gen import generate_word_list
 from typing_test.copyproof import copyproof, has_copyproof
 from typing_test.results import get_results
+
+from functools import partial
 import discord
 import time
 
@@ -13,11 +16,9 @@ def typing_test_main(bot):
   # theoretical memory leak if a ton of users never finish tests
   typing_test_users = {}
   
-  typing_test_group = bot.create_group("typingtest", "Typing Test-related commands")
-  
-  @typing_test_group.command(description="Create a new Typing Test")
   async def typing_test(
     ctx,
+    code,
     script: discord.Option(str, choices=["Latin", "Shavian"])
   ):
     """
@@ -26,7 +27,9 @@ def typing_test_main(bot):
     
     # input validation
     if (script not in ["Latin", "Shavian"]):
-      await ctx.respond("Invalid script choice")
+      await ctx.respond(
+        locales[code]["typing_test"]["start_responses"]["invalid_script"]
+      )
       return
     
     # if the user is already in a test just overwrite it
@@ -39,7 +42,8 @@ def typing_test_main(bot):
       "script": script,
       "word_list": word_list,
       "timestamp": time.time(),
-      "channel_id": ctx.channel.id
+      "channel_id": ctx.channel.id,
+      "code": code
     }
 
     await ctx.respond(
@@ -58,6 +62,7 @@ def typing_test_main(bot):
       return
     
     test_data = typing_test_users[author.id]
+    code = test_data["code"]
     
     # check channel
     if message.channel.id != test_data["channel_id"]:
@@ -74,7 +79,8 @@ def typing_test_main(bot):
     # check copyproof
     if has_copyproof(message.content):
       await message.channel.send(
-        f"{author.mention} u cheated! :<"
+        locales[code]["typing_test"]["on_message_responses"]["cheated"]
+          .format(mention=author.mention)
       )
       del typing_test_users[author.id]
       return
@@ -91,19 +97,38 @@ def typing_test_main(bot):
     
     # send results
     await message.channel.send(
-      f"*{author.mention}'s Results*:\n" +
-      f"- **{results['wpm']:.2f}** WPM\n" +
-      f"- Accuracy: **{results['accuracy']:.2f}%**\n"
+      locales[code]["typing_test"]["on_message_responses"]["results"]
+        .format(
+          mention=author.mention,
+          wpm=results["wpm"],
+          accuracy=results["accuracy"],
+        )
     )
   
-  @typing_test_group.command(description="Cancel your active Typing Test")
-  async def cancel_typing_test(ctx):
+  async def cancel_typing_test(ctx, code):
     """
     cancels the user's active typing test
     """
     
     if ctx.author.id in typing_test_users:
       del typing_test_users[ctx.author.id]
-      await ctx.respond("Your active Typing Test has been cancelled.")
+      await ctx.respond(locales[code]["typing_test"]["cancel_responses"]["cancelled"])
     else:
-      await ctx.respond("You do not have an active Typing Test.")
+      await ctx.respond(locales[code]["typing_test"]["cancel_responses"]["not_active"])
+
+  for code in locales:
+    locale = locales[code]
+  
+    typing_group = bot.create_group(
+      locale["typing_test"]["group_command_name"],
+      locale["typing_test"]["group_command_description"]
+    )
+    
+    typing_group.command(
+      name=locale["typing_test"]["start_command_name"],
+      description=locale["typing_test"]["start_command_description"]
+    )(pass_locales(typing_test, code))
+    typing_group.command(
+      name=locale["typing_test"]["cancel_command_name"],
+      description=locale["typing_test"]["cancel_command_description"]
+    )(pass_locales(cancel_typing_test, code))
