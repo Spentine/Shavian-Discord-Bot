@@ -92,8 +92,8 @@ def typing_test_main(bot):
     # send results
     await message.channel.send(
       f"*{author.mention}'s Results*:\n" +
-      f"- **{results["wpm"]:.2f}** WPM\n" +
-      f"- Accuracy: **{results["accuracy"]:.2f}%**\n"
+      f"- **{results['wpm']:.2f}** WPM\n" +
+      f"- Accuracy: **{results['accuracy']:.2f}%**\n"
     )
   
   @typing_test_group.command(description="Cancel your active Typing Test")
