@@ -19,7 +19,7 @@
     
     "on_message_responses": {
       "cheated": "{mention} u cheated! :<",
-      "results": "*{mention}'s Results*:\n- **{wpm:.2f} WPM\n-Accuracy: **{accuracy:.2f}%**"
+      "results": "*{mention}'s Results*:\n- **{wpm:.2f}** WPM\n- Accuracy: **{accuracy:.2f}%**"
     },
     
     "cancel_command_name": "cancel",
