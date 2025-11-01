@@ -39,7 +39,7 @@ def fetch_word_list(location):
   """
   fetches a list of words from a given text file location
   """
-  with open(location, "r") as f:
+  with open(location, "r", encoding="utf-8") as f:
     words = f.read().splitlines()
   return words
 

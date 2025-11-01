@@ -1,7 +1,9 @@
+import json
+
 def get_readlex_data():
   readlex_location = "src/readlex/readlex.json"
   
-  with open(readlex_location, "r") as f:
+  with open(readlex_location, "r", encoding="utf-8") as f:
     readlex_data = json.load(f)
   
   return readlex_data
