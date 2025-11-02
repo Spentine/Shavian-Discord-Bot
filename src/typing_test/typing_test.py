@@ -4,6 +4,7 @@ from typing_test.copyproof import copyproof, has_copyproof
 from typing_test.results import get_results
 
 from functools import partial
+import json
 import discord
 import time
 
