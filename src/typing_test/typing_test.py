@@ -20,7 +20,7 @@ def typing_test_main(bot):
   async def typing_test(
     ctx,
     code,
-    script: discord.Option(str, choices=["Latin", "Shavian"])
+    script: str,
   ):
     """
     starts a new typing test for the user
@@ -119,7 +119,28 @@ def typing_test_main(bot):
 
   for code in locales:
     locale = locales[code]
-  
+    
+    # locale function
+    script_option = discord.Option(
+      str,
+      name=locale["typing_test"]["start_options"]["script"]["name"],
+      description=locale["typing_test"]["start_options"]["script"]["description"],
+      choices=[
+        discord.OptionChoice(
+          name=locale["typing_test"]["start_options"]["script"]["latin"],
+          value="Latin"
+        ),
+        discord.OptionChoice(
+          name=locale["typing_test"]["start_options"]["script"]["shavian"],
+          value="Shavian"
+        )
+      ]
+    )
+    
+    async def locale_typing_test(func, script: str = script_option):
+      await typing_test(func, code, script)
+    
+    # creating typing command group
     typing_group = bot.create_group(
       locale["typing_test"]["group_command_name"],
       locale["typing_test"]["group_command_description"]
@@ -128,7 +149,7 @@ def typing_test_main(bot):
     typing_group.command(
       name=locale["typing_test"]["start_command_name"],
       description=locale["typing_test"]["start_command_description"]
-    )(pass_locales(typing_test, code))
+    )(locale_typing_test)
     typing_group.command(
       name=locale["typing_test"]["cancel_command_name"],
       description=locale["typing_test"]["cancel_command_description"]

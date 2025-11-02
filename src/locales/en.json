@@ -13,6 +13,14 @@
     
     "start_command_name": "start",
     "start_command_description": "Create a new Typing Test",
+    "start_options": {
+      "script": {
+        "name": "script",
+        "description": "The script to use for the Typing Test",
+        "latin": "Latin",
+        "shavian": "Shavian"
+      }
+    },
     "start_responses": {
       "invalid_script": "Invalid script choice."
     },
