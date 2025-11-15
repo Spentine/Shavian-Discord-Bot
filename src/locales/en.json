@@ -19,6 +19,12 @@
         "description": "The script to use for the Typing Test",
         "latin": "Latin",
         "shavian": "Shavian"
+      },
+      "word_freq": {
+        "name": "word_frequency",
+        "description": "The word frequency list to use for the Typing Test",
+        "200": "200",
+        "1000": "1000"
       }
     },
     "start_responses": {

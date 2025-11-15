@@ -1,5 +1,5 @@
 from locales.locales import locales, pass_locales
-from typing_test.text_gen import generate_word_list
+from typing_test.text_fetch import generate_word_list
 from typing_test.copyproof import copyproof, has_copyproof
 from typing_test.results import get_results
 
@@ -21,6 +21,7 @@ def typing_test_main(bot):
     ctx,
     code,
     script: str,
+    word_freq: str,
   ):
     """
     starts a new typing test for the user
@@ -37,7 +38,7 @@ def typing_test_main(bot):
     # there is no code to handle it because of how dictionaries work
     
     # string of words
-    word_list = generate_word_list(script)
+    word_list = generate_word_list(script=script, word_freq=word_freq, count=25)
     
     typing_test_users[ctx.author.id] = {
       "script": script,
@@ -136,9 +137,26 @@ def typing_test_main(bot):
         )
       ]
     )
+    word_freq_option = discord.Option(
+      str,
+      name=locale["typing_test"]["start_options"]["word_freq"]["name"],
+      description=locale["typing_test"]["start_options"]["word_freq"]["description"],
+      choices=[
+        discord.OptionChoice(
+          name=locale["typing_test"]["start_options"]["word_freq"]["200"],
+          value="200"
+        ),
+        discord.OptionChoice(
+          name=locale["typing_test"]["start_options"]["word_freq"]["1000"],
+          value="1000"
+        )
+      ]
+    )
     
-    async def locale_typing_test(func, script: str = script_option):
-      await typing_test(func, code, script)
+    async def locale_typing_test(
+      func, script: str = script_option, word_freq: str = word_freq_option
+    ):
+      await typing_test(func, code, script, word_freq)
     
     # creating typing command group
     typing_group = bot.create_group(

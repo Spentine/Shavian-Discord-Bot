@@ -31,7 +31,7 @@ class ShavBot(discord.Bot):
   def register_on_message(self, func):
     self.on_message_callbacks.append(func)
 
-def main():
+def primary_main():
   init_data = retrieve_init_data("secrets.json")
   
   intents = discord.Intents.all()

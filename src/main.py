@@ -2,6 +2,6 @@
 this is the main entry point for the Shavian Discord Bot.
 """
 
-from primary.bot import main
+from console_interaction.interaction import interaction_main
 
-main()
+interaction_main(0)
