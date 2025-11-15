@@ -35,7 +35,7 @@ def convert_to_shavian_list(word_list):
     if (len(item) == 1):
       s += item[0] + "\n"
     else:
-      s += f"{" / ".join(item)} ("+ word_list[index] + ")\n"
+      s += f"{' / '.join(item)} ('+ word_list[index] + ')\n"
   
   return s
 
