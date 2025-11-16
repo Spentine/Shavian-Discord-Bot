@@ -69,21 +69,21 @@
       "TO0": "infinitive marker 'to'",
       "UNC": "unclassified token",
       
-      "VBB": "1st person singular",
+      "VBB": "singular verb",
       "VBD": "past tense",
       "VBG": "present participle",
       "VBI": "verb",
       "VBN": "past participle",
       "VBZ": "3rd person singular",
       
-      "VDB": "1st person singular",
+      "VDB": "singular verb",
       "VDD": "past tense",
       "VDG": "present participle",
       "VDI": "verb",
       "VDN": "past participle",
       "VDZ": "3rd person singular",
       
-      "VHB": "1st person singular",
+      "VHB": "singular verb",
       "VHD": "past tense",
       "VHG": "present participle",
       "VHI": "verb",
@@ -91,7 +91,7 @@
       "VHZ": "3rd person singular",
       
       "VM0": "modal auxiliary verb",
-      "VVB": "1st person singular",
+      "VVB": "singular verb",
       "VVD": "past tense",
       "VVG": "present participle",
       "VVI": "verb",
