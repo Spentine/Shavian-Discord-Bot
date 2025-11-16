@@ -3,7 +3,6 @@ from typing_test.text_fetch import generate_word_list
 from typing_test.copyproof import copyproof, has_copyproof
 from typing_test.results import get_results
 
-from functools import partial
 import json
 import discord
 import time
@@ -154,9 +153,9 @@ def typing_test_main(bot):
     )
     
     async def locale_typing_test(
-      func, script: str = script_option, word_freq: str = word_freq_option
+      ctx, script: str = script_option, word_freq: str = word_freq_option
     ):
-      await typing_test(func, code, script, word_freq)
+      await typing_test(ctx, code, script, word_freq)
     
     # creating typing command group
     typing_group = bot.create_group(

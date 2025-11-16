@@ -38,7 +38,7 @@ def primary_main():
   bot = ShavBot(intents=intents)
   
   primary_interactions(bot)
-  # readlex_main(bot) # not implemented yet
+  readlex_main(bot)
   typing_test_main(bot)
   
   bot.run(init_data["token"])

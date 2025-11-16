@@ -2,7 +2,7 @@
 this is a tool to make creating shavian word lists easier
 """
 
-from readlex.readlex import get_readlex_data
+from readlex.readlex import readlex_converter_data
 from typing_test.text_fetch import fetch_word_list
 import json
 
@@ -14,14 +14,12 @@ def convert_to_shavian_list(word_list):
   meant more as a pre-production utility than anything else
   """
   
-  readlex_data = get_readlex_data()
-  
   shavian_word_list = []
   
   # get shavian equivalents
   for word in word_list:
-    if word in readlex_data:
-      data = readlex_data[word]
+    if word in readlex_converter_data:
+      data = readlex_converter_data[word]
       options = []
       for entry in data:
         options.append(entry["Shaw"])

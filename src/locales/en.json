@@ -7,6 +7,101 @@
   "help_command_description": "Help command",
   "help_response": "idk man just use the slash commands lol",
   
+  "readlex": {
+    "group_command_name": "readlex",
+    "group_command_description": "ReadLex-related commands",
+    
+    "search_command_name": "search",
+    "search_command_description": "Search on ReadLex",
+    "search_options": {
+      "word": {
+        "name": "word",
+        "description": "The word to search for"
+      },
+      "ephemeral": {
+        "name": "ephemeral",
+        "description": "Whether the response should only be visible to you",
+        "true": "True",
+        "false": "False"
+      }
+    },
+    "search_responses": {
+      "author": "Read Lexicon",
+      "footer": "ReadLex Version 2025-06-29",
+      "singular_result": "1 search result for *{word}*",
+      "plural_result": "{entries} search results for *{word}*",
+      "no_results_found": "No results found",
+      "no_results_found_desc": "Try using a different spelling."
+    },
+    "pos_map": {
+      "AJ0": "adjective",
+      "AJC": "comparative adjective",
+      "AJS": "superlative adjective",
+      "AT0": "article",
+      "AV0": "adverb",
+      "AVP": "prepositional adverb",
+      "AVQ": "interrogative adverb",
+      "CJC": "coordinating conjunction",
+      "CJS": "subordinating conjunction",
+      "CJT": "subordinating conjunction",
+      "CRD": "cardinal numeral",
+      "DPS": "possessive determiner",
+      "DT0": "determiner",
+      "DTQ": "interrogative determiner",
+      "EX0": "existential 'there'",
+      "ITJ": "interjection",
+      "NN0": "neutral common noun",
+      "NN1": "singular common noun",
+      "NN2": "plural common noun",
+      "NP0": "proper noun",
+      "ORD": "ordinal numeral",
+      "PNI": "indefinite pronoun",
+      "PNP": "personal pronoun",
+      "PNQ": "interrogative pronoun",
+      "PNX": "reflexive pronoun",
+      "POS": "possessive clitic",
+      "PRF": "'of'",
+      "PRP": "preposition",
+      "PUL": "left parenthesis",
+      "PUN": "punctuation mark",
+      "PUQ": "quotation mark",
+      "PUR": "right parenthesis",
+      "TO0": "infinitive marker 'to'",
+      "UNC": "unclassified token",
+      
+      "VBB": "1st person singular",
+      "VBD": "past tense",
+      "VBG": "present participle",
+      "VBI": "verb",
+      "VBN": "past participle",
+      "VBZ": "3rd person singular",
+      
+      "VDB": "1st person singular",
+      "VDD": "past tense",
+      "VDG": "present participle",
+      "VDI": "verb",
+      "VDN": "past participle",
+      "VDZ": "3rd person singular",
+      
+      "VHB": "1st person singular",
+      "VHD": "past tense",
+      "VHG": "present participle",
+      "VHI": "verb",
+      "VHN": "past participle",
+      "VHZ": "3rd person singular",
+      
+      "VM0": "modal auxiliary verb",
+      "VVB": "1st person singular",
+      "VVD": "past tense",
+      "VVG": "present participle",
+      "VVI": "verb",
+      "VVN": "past participle",
+      "VVZ": "3rd person singular",
+      "XX0": "negative particle",
+      "ZZ0": "alphabetic symbol"
+    }
+  },
+  
   "typing_test": {
     "group_command_name": "typing",
     "group_command_description": "Typing Test-related commands",
