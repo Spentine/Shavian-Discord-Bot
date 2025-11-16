@@ -161,9 +161,9 @@ def readlex_main(bot):
     )
     
     async def locale_search(
-      ctx, word: str = word_option, ephemeral: str = ephemeral_option
+      ctx, code, word: str = word_option, ephemeral: str = ephemeral_option
     ):
-      await search(ctx, code, word, bool(ephemeral))
+      await search(ctx, code, word, ephemeral == "true")
     
     readlex_group = bot.create_group(
       locale["readlex"]["group_command_name"],
@@ -173,4 +173,4 @@ def readlex_main(bot):
     readlex_group.command(
       name=locale["readlex"]["search_command_name"],
       description=locale["readlex"]["search_command_description"]
-    )(locale_search)    
+    )(pass_locales(locale_search, code))

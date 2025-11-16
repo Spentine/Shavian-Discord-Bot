@@ -33,6 +33,7 @@ def load_locales():
 
 # AI-GENERATED FUNCTION
 # there is absolutely no way i will be able to write this myself
+# circumvents python's late binding in closures
 def pass_locales(func, code):
   """
   decorator to pass locale data to command functions

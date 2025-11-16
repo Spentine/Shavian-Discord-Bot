@@ -153,7 +153,7 @@ def typing_test_main(bot):
     )
     
     async def locale_typing_test(
-      ctx, script: str = script_option, word_freq: str = word_freq_option
+      ctx, code, script: str = script_option, word_freq: str = word_freq_option
     ):
       await typing_test(ctx, code, script, word_freq)
     
@@ -166,7 +166,7 @@ def typing_test_main(bot):
     typing_group.command(
       name=locale["typing_test"]["start_command_name"],
       description=locale["typing_test"]["start_command_description"]
-    )(locale_typing_test)
+    )(pass_locales(locale_typing_test, code))
     typing_group.command(
       name=locale["typing_test"]["cancel_command_name"],
       description=locale["typing_test"]["cancel_command_description"]
