@@ -51,3 +51,5 @@ def retrieve_init_data(data_location):
     data = construct_file(data_location)
   
   return data
+
+init_data = retrieve_init_data("secrets.json")

@@ -120,33 +120,36 @@ def typing_test_main(bot):
   for code in locales:
     locale = locales[code]
     
+    script_info = locale["typing_test"]["start_options"]["script"]
+    word_freq_info = locale["typing_test"]["start_options"]["word_freq"]
+    
     # locale function
     script_option = discord.Option(
       str,
-      name=locale["typing_test"]["start_options"]["script"]["name"],
-      description=locale["typing_test"]["start_options"]["script"]["description"],
+      name=script_info["name"],
+      description=script_info["description"],
       choices=[
         discord.OptionChoice(
-          name=locale["typing_test"]["start_options"]["script"]["latin"],
+          name=script_info["latin"],
           value="Latin"
         ),
         discord.OptionChoice(
-          name=locale["typing_test"]["start_options"]["script"]["shavian"],
+          name=script_info["shavian"],
           value="Shavian"
         )
       ]
     )
     word_freq_option = discord.Option(
       str,
-      name=locale["typing_test"]["start_options"]["word_freq"]["name"],
-      description=locale["typing_test"]["start_options"]["word_freq"]["description"],
+      name=word_freq_info["name"],
+      description=word_freq_info["description"],
       choices=[
         discord.OptionChoice(
-          name=locale["typing_test"]["start_options"]["word_freq"]["200"],
+          name=word_freq_info["200"],
           value="200"
         ),
         discord.OptionChoice(
-          name=locale["typing_test"]["start_options"]["word_freq"]["1000"],
+          name=word_freq_info["1000"],
           value="1000"
         )
       ]

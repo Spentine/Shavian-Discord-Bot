@@ -1,5 +1,5 @@
 from locales.locales import locales, pass_locales
-from primary.util import retrieve_init_data
+from primary.util import init_data
 from readlex.readlex import readlex_main
 from typing_test.typing_test import typing_test_main
 
@@ -32,8 +32,6 @@ class ShavBot(discord.Bot):
     self.on_message_callbacks.append(func)
 
 def primary_main():
-  init_data = retrieve_init_data("secrets.json")
-  
   intents = discord.Intents.all()
   bot = ShavBot(intents=intents)
   

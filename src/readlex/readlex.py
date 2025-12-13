@@ -90,15 +90,16 @@ def readlex_main(bot):
     """
     
     entries = search_readlex(word)
+    search_responses_locale = locales[code]["readlex"]["search_responses"]
     
     # create embed
     embed = discord.Embed(
       title=( # pluralize based on number of entries
         (
-          locales[code]["readlex"]["search_responses"]["singular_result"]
+          search_responses_locale["singular_result"]
             .format(word=word)
         ) if len(entries) == 1 else (
-          locales[code]["readlex"]["search_responses"]["plural_result"]
+          search_responses_locale["plural_result"]
             .format(entries=len(entries), word=word)
         )
       ),
@@ -107,18 +108,18 @@ def readlex_main(bot):
     
     icon_url = "https://readlex.pythonanywhere.com/static/favicon.png"
     embed.set_author(
-      name=locales[code]["readlex"]["search_responses"]["author"],
+      name=search_responses_locale["author"],
       icon_url=icon_url
     )
-    embed.set_footer(text=locales[code]["readlex"]["search_responses"]["footer"])
+    embed.set_footer(text=search_responses_locale["footer"])
     
     def add_entry(word, ipa, pos):
       embed.add_field(name=word, value=f"> /{ipa}/\n> *{pos}*", inline=True)
     
     if (len(entries) == 0):
       embed.add_field(
-        name=locales[code]["readlex"]["search_responses"]["no_results_found"],
-        value=locales[code]["readlex"]["search_responses"]["no_results_found_desc"]
+        name=search_responses_locale["no_results_found"],
+        value=search_responses_locale["no_results_found_desc"]
       )
     else:
       for entry in entries:
@@ -138,23 +139,26 @@ def readlex_main(bot):
   for code in locales:
     locale = locales[code]
     
+    word_info = locale["readlex"]["search_options"]["word"]
+    ephemeral_info = locale["readlex"]["search_options"]["ephemeral"]
+    
     # locale function
     word_option = discord.Option(
       str,
-      name=locale["readlex"]["search_options"]["word"]["name"],
-      description=locale["readlex"]["search_options"]["word"]["description"]
+      name=word_info["name"],
+      description=word_info["description"]
     )
     ephemeral_option = discord.Option(
       str,
-      name=locale["readlex"]["search_options"]["ephemeral"]["name"],
-      description=locale["readlex"]["search_options"]["ephemeral"]["description"],
+      name=ephemeral_info["name"],
+      description=ephemeral_info["description"],
       choices=[
         discord.OptionChoice(
-          name=locale["readlex"]["search_options"]["ephemeral"]["true"],
+          name=ephemeral_info["true"],
           value="true"
         ),
         discord.OptionChoice(
-          name=locale["readlex"]["search_options"]["ephemeral"]["false"],
+          name=ephemeral_info["false"],
           value="false"
         )
       ]
