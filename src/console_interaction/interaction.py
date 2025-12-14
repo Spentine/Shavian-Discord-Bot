@@ -4,7 +4,6 @@ handles console interaction with bot
 
 from primary.bot import primary_main
 from dev.text_gen.text_gen import text_gen_main
-from transliteration.shav_to_latin import transliteration_main
 
 def request_purpose(options):
   """
@@ -39,7 +38,6 @@ def interaction_main(purpose=None):
   options = [
     ("Start up Discord bot", primary_main),
     ("Run dev/text_gen", text_gen_main),
-    ("Run transliteration/shav_to_latin", transliteration_main),
     ("Exit", None)
   ]
   

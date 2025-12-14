@@ -2,6 +2,7 @@ from locales.locales import locales, pass_locales
 from primary.util import init_data
 from readlex.readlex import readlex_main
 from typing_test.typing_test import typing_test_main
+from transliteration.transliteration import transliteration_main
 
 from functools import partial
 import discord
@@ -38,6 +39,7 @@ def primary_main():
   primary_interactions(bot)
   readlex_main(bot)
   typing_test_main(bot)
+  transliteration_main(bot)
   
   bot.run(init_data["token"])
 

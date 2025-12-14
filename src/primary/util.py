@@ -12,6 +12,11 @@ def construct_file(data_location):
   token = input().strip()
   data = { "token": token }
   
+  # get hack club api key
+  print("Enter Hack Club API key: ", end="")
+  hack_club_api_key = input().strip()
+  data["hack_club_api_key"] = hack_club_api_key
+  
   # write data to file
   try:
     f = open(data_location, "w")
@@ -23,9 +28,10 @@ def construct_file(data_location):
   
   return data
 
-def retrieve_init_data(data_location):
+def retrieve_data(data_location):
   """
   retrieves necessary data from a secrets file located in `data_location`
+  and also `data.json`
   """
   
   data = None
@@ -52,4 +58,5 @@ def retrieve_init_data(data_location):
   
   return data
 
-init_data = retrieve_init_data("secrets.json")
+init_data = retrieve_data("secrets.json")
+generic_data = retrieve_data("data.json")
