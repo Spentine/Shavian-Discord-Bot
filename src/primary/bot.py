@@ -6,6 +6,7 @@ from transliteration.transliteration import transliteration_main
 
 from functools import partial
 import discord
+import asyncio
 
 class ShavBot(discord.Bot):
   """
@@ -33,6 +34,14 @@ class ShavBot(discord.Bot):
     self.on_message_callbacks.append(func)
 
 def primary_main():
+  # event loop for Python 3.10+ compatibility
+  try:
+    loop = asyncio.get_event_loop()
+  except RuntimeError:
+    loop = asyncio.new_event_loop()
+    
+    asyncio.set_event_loop(loop)
+  
   intents = discord.Intents.all()
   bot = ShavBot(intents=intents)
   
