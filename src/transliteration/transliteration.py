@@ -16,14 +16,17 @@ def transliteration_main(bot):
     transliterates text
     """
     
+    transliterate_info = locales[code]["transliteration"]["transliterate_responses"]
+    
     # check access
     if ctx.author.id not in generic_data.get("transliteration_access", []):
-      await ctx.respond("You do not have access to this command.", ephemeral=True)
+      await ctx.respond(transliterate_info["no_access"], ephemeral=True)
       return
     
     # reply with loading message
     message = await ctx.respond(
-      "Transliterating... " + generic_data["emojis"]["loading"],
+      transliterate_info["loading"]
+        .format(loading_emoji=generic_data["emojis"]["loading"]),
       ephemeral=True
     )
     
@@ -36,7 +39,7 @@ def transliteration_main(bot):
       
       # check for errors
       if not result:
-        await message.edit(content="An error occurred during transliteration.")
+        await message.edit(content=transliterate_info["error"])
         return
       
       await message.edit(content=result)
@@ -67,48 +70,52 @@ def transliteration_main(bot):
     # use transliterate function
     await transliterate(ctx, code, to_script, text)
   
-  code = "en"
-  
-  to_option = discord.Option(
-    str,
-    name="to",
-    description="The script to transliterate to",
-    choices=[
-      discord.OptionChoice(
-        name="Latin",
-        value="Latin"
-      ),
-      discord.OptionChoice(
-        name="Shavian",
-        value="Shavian"
-      )
-    ]
-  )
-  text_option = discord.Option(
-    str,
-    name="text",
-    description="The text to transliterate"
-  )
-  
-  async def locale_transliterate(
-    ctx, code, to: str = to_option, text: str = text_option
-  ):
-    await transliterate(ctx, code, to, text)
-  
-  async def locale_transliterate_last(ctx, code):
-    await transliterate_last(ctx, code)
-  
-  transliteration_group = bot.create_group(
-    "transliteration",
-    "Commands for transliterating text between Latin and Shavian scripts"
-  )
-  
-  transliteration_group.command(
-    name="transliterate",
-    description="Transliterate text between Latin and Shavian scripts"
-  )(pass_locales(locale_transliterate, code))
-  
-  transliteration_group.command(
-    name="transliterate_last",
-    description="Transliterate the last message in the channel between Latin and Shavian scripts"
-  )(pass_locales(locale_transliterate_last, code))
+  for code in locales:
+    locale = locales[code]
+    
+    to_info = locale["transliteration"]["transliterate_options"]["to"]
+    text_info = locale["transliteration"]["transliterate_options"]["text"]
+    
+    to_option = discord.Option(
+      str,
+      name=to_info["name"],
+      description=to_info["description"],
+      choices=[
+        discord.OptionChoice(
+          name=to_info["latin"],
+          value="Latin"
+        ),
+        discord.OptionChoice(
+          name=to_info["shavian"],
+          value="Shavian"
+        )
+      ]
+    )
+    text_option = discord.Option(
+      str,
+      name=text_info["name"],
+      description=text_info["description"]
+    )
+    
+    async def locale_transliterate(
+      ctx, code, to: str = to_option, text: str = text_option
+    ):
+      await transliterate(ctx, code, to, text)
+    
+    async def locale_transliterate_last(ctx, code):
+      await transliterate_last(ctx, code)
+    
+    transliteration_group = bot.create_group(
+      locale["transliteration"]["group_command_name"],
+      locale["transliteration"]["group_command_description"]
+    )
+    
+    transliteration_group.command(
+      name=locale["transliteration"]["transliterate_command_name"],
+      description=locale["transliteration"]["transliterate_command_description"]
+    )(pass_locales(locale_transliterate, code))
+    
+    transliteration_group.command(
+      name=locale["transliteration"]["transliterate_last_command_name"],
+      description=locale["transliteration"]["transliterate_last_command_description"]
+    )(pass_locales(locale_transliterate_last, code))

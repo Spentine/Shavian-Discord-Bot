@@ -137,5 +137,33 @@
       "not_active": "You do not have an active Typing Test.",
       "cancelled": "Your active Typing Test has been cancelled."
     }
+  },
+  
+  "transliteration": {
+    "group_command_name": "transliteration",
+    "group_command_description": "Commands for transliterating text between Latin and Shavian scripts",
+    
+    "transliterate_command_name": "transliterate",
+    "transliterate_command_description": "Transliterate text between Latin and Shavian scripts",
+    "transliterate_options": {
+      "to": {
+        "name": "to",
+        "description": "The script to transliterate to",
+        "latin": "Latin",
+        "shavian": "Shavian"
+      },
+      "text": {
+        "name": "text",
+        "description": "The text to transliterate"
+      }
+    },
+    "transliterate_responses": {
+      "no_access": "You do not have access to this command.",
+      "loading": "Transliterating... {loading_emoji}",
+      "error": "An error occurred during transliteration."
+    },
+    
+    "transliterate_last_command_name": "transliterate_last",
+    "transliterate_last_command_description": "Transliterate the last message in the channel between Latin and Shavian scripts"
   }
 }
