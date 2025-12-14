@@ -9,7 +9,6 @@ so no openrouter, you have to use httpx or something
 """
 # from openrouter import OpenRouter
 import httpx
-import requests
 from primary.util import init_data
 
 def establish_connection():
