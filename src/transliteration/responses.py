@@ -13,6 +13,13 @@ import requests
 from primary.util import init_data
 
 def establish_connection():
+  """
+  returns a function that gets responses from an LLM
+  in this case, hack club api
+  
+  :return: function or None
+  """
+  
   # check if api key exists
   if "hack_club_api_key" not in init_data:
     return None
@@ -27,7 +34,9 @@ def establish_connection():
   
   async def get_responses(prompt):
     """
-    get responses from hack club
+    gets responses from hack club api
+    
+    :param prompt: single message prompt
     """
     
     json = {
