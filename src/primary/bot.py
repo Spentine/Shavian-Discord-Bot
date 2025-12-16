@@ -60,7 +60,7 @@ def primary_interactions(bot):
   async def ping(ctx, code):
     await ctx.respond(
       locales[code]["ping_response"]
-        .format(latency=bot.latency*1000)
+        .format(latency=int(bot.latency*1000))
     )
   
   async def help(ctx, code):

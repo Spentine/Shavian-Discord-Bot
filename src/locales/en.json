@@ -160,7 +160,8 @@
     "transliterate_responses": {
       "no_access": "You do not have access to this command.",
       "loading": "Transliterating... {loading_emoji}",
-      "error": "An error occurred during transliteration."
+      "error": "An error occurred during transliteration.",
+      "output": "{result}\n-# — {time}ms —"
     },
     
     "transliterate_last_command_name": "transliterate_last",

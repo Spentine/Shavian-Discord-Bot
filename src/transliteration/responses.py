@@ -42,6 +42,7 @@ def establish_connection():
       "model": model,
       "input": prompt,
       "max_output_tokens": 9000,
+      "effort": "minimal"
     }
     
     # make async request

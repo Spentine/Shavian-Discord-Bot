@@ -3,6 +3,7 @@ from transliteration.latin_to_shav import latin_to_shav
 from transliteration.shav_to_latin import shav_to_latin
 from transliteration.detect_script import detect_script
 import discord
+import time
 
 from primary.util import generic_data
 
@@ -30,23 +31,26 @@ def transliteration_main(bot):
       ephemeral=True
     )
     
-    async def do_transliteration():
-      # transliterate
-      if to == "Shavian":
-        result = await latin_to_shav(text)
-      else:
-        result = await shav_to_latin(text)
-      
-      # check for errors
-      if not result:
-        await message.edit(content=transliterate_info["error"])
-        return
-      
-      await message.edit(content=result)
+    start_time = time.time()
     
-    # spawn transliteration task
-    # do not await directly to prevent blocking
-    bot.loop.create_task(do_transliteration())
+    # transliterate
+    if to == "Shavian":
+      result = await latin_to_shav(text)
+    else:
+      result = await shav_to_latin(text)
+    
+    # check for errors
+    if not result:
+      await message.edit(content=transliterate_info["error"])
+      return
+    
+    end_time = time.time()
+    duration = end_time - start_time
+    
+    await message.edit(
+      content=transliterate_info["output"]
+        .format(result=result, time=int(duration * 1000))
+    )
   
   async def transliterate_last(ctx, code: str):
     """
