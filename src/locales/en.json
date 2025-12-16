@@ -140,10 +140,10 @@
   },
   
   "transliteration": {
-    "group_command_name": "transliteration",
+    "group_command_name": "tl",
     "group_command_description": "Commands for transliterating text between Latin and Shavian scripts",
     
-    "transliterate_command_name": "transliterate",
+    "transliterate_command_name": "text",
     "transliterate_command_description": "Transliterate text between Latin and Shavian scripts",
     "transliterate_options": {
       "to": {
@@ -164,7 +164,7 @@
       "output": "{result}\n-# — {time}ms —"
     },
     
-    "transliterate_last_command_name": "transliterate_last",
+    "transliterate_last_command_name": "last",
     "transliterate_last_command_description": "Transliterate the last message in the channel between Latin and Shavian scripts"
   }
 }
