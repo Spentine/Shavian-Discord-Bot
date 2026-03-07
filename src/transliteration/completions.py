@@ -23,7 +23,7 @@ def establish_connection():
     "Content-Type": "application/json"
   }
   
-  model = "google/gemini-3-pro-preview"
+  model = "openai/gpt-oss-120b"
   
   async def get_completions(messages):
     """
@@ -36,7 +36,8 @@ def establish_connection():
       "model": model,
       "messages": messages,
       "reasoning": {
-        "effort": "minimal",
+        # "xhigh", "high", "medium", "low", "minimal", "none"
+        "effort": "medium",
       }
     }
     

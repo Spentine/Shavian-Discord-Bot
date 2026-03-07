@@ -21,6 +21,7 @@ async def shav_to_latin(shavian_text, type="completions"):
           "You are a transliteration engine that converts text from Shavian script to Latin script. "
           "You must only respond with the transliterated text, and nothing else. Do not think either, just answer directly. "
           "Miscellaneous characters: · (Namer Dot) is for proper nouns, and ⸰ (Acronym Dot) is for acronyms."
+          "Omit the dots in the transliteration, and write words with Standard English Orthography (words are spelled normally, not how they sound)."
         )
       },
       {
